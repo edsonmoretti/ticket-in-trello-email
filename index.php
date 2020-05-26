@@ -1,5 +1,9 @@
 <?php
-
+require 'vendor/autoload.php';
+if (is_null(CONFIG_EMAIL_DESTINO_PRINCIPAL) || empty(CONFIG_EMAIL_DESTINO_PRINCIPAL)) {
+    echo 'Error: E-mail destino não configurado. Entre em contato com suporte.';
+    die();
+}
 if (filter_input(INPUT_POST, 'submit')) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
@@ -10,8 +14,6 @@ if (filter_input(INPUT_POST, 'submit')) {
         //erro ao fazer upload, ignorar arquivo e proceder com chamado
         $erroNoUpload = true;
     }
-
-    require 'vendor/autoload.php';
     $nome = strtoupper(filter_input(INPUT_POST, 'nome'));
     $loja = strtoupper(filter_input(INPUT_POST, 'loja'));
     $equipamento = strtoupper(filter_input(INPUT_POST, 'equipamento'));
@@ -33,7 +35,9 @@ if (filter_input(INPUT_POST, 'submit')) {
         $email->send([
             CONFIG_EMAIL_DESTINO_2, CONFIG_EMAIL_DESTINO_3
         ]);
-        unlink($target_file);
+        if (file_exists($target_file) && is_file($target_file)) {
+            unlink($target_file);
+        }
         if (!$error = $email->error()) {
             $mensagemSucesso = 'Abertura de chamado enviado.';
         } else {
@@ -59,12 +63,8 @@ if (filter_input(INPUT_POST, 'submit')) {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-
-</body>
-</html>
-
 <div class="container fluid">
-    <div class="card">
+    <div class="card border-danger">
         <?php if (!empty($mensagemSucesso)) { ?>
             <div class="card-header alert bg-success text-white">
                 <h5 style="text-align: center"><b><?= $mensagemSucesso ?></b></h5>
@@ -75,30 +75,32 @@ if (filter_input(INPUT_POST, 'submit')) {
                 <h5 style="text-align: center"><b><?= $mensagemDeErro ?></b></h5>
             </div>
         <?php } ?>
-        <div class="card-header">
-            <h5 style="text-align: center"><b>PagMenos - TI | Abertura de Chamados</b></h5>
+        <div style="text-align: center" class="card-header bg-danger text-white">
+            <p><img src="imgs/logo.png" class="img-fluid" style="max-width: 300px"/></p>
+            <p><h5><b>PagMenos - TI | Abertura de Chamados</b></h5></p>
         </div>
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nome"><b>NOME E SOBRENOME</label>
                     <input type="text" required class="form-control" id="nome" name="nome"
+                           onblur="if(!document.getElementById('nome').value.trim().includes(' ')){alert('Nome inválido!');}"
                            placeholder="EX.: FULANO DA SILVA">
                 </div>
                 <div class="form-group">
                     <label for="loja"><b>LOJA</b></label></label>
                     <select required class="form-control" id="loja" name="loja">
                         <option disabled selected>SELECIONE</option>
-                        <option value="">LOJA 01</option>
+                        <option>LOJA 01</option>
                         <option>LOJA 02</option>
-                        <option>LOJA 03</option>
                         <option>LOJA 04</option>
                         <option>LOJA 05</option>
                         <option>LOJA 06</option>
-                        <option>LOJA 07</option>
                         <option>LOJA 08</option>
                         <option>LOJA 09</option>
                         <option>LOJA 10</option>
+                        <option>LOJA 11</option>
+                        <option>ESCRITÓRIO</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -116,11 +118,16 @@ if (filter_input(INPUT_POST, 'submit')) {
                     <input id="foto" name="foto" type="file" accept="image/*;capture=camera" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="form-control btn btn-info" name="submit" value="Abertura de Chamado">
-                        ABRIR CHAMADO
+                    <hr>
+                    <br>
+                    <button type="submit" class="form-control btn btn-lg btn-outline-danger" name="submit"
+                            value="Abertura de Chamado">
+                        <b> ABRIR CHAMADO</b>
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+</body>
+</html>

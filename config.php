@@ -1,9 +1,7 @@
 <?php
 
-define('CONFIG_EMAIL_DESTINO_PRINCIPAL', 'edsonmorettisoscatoes+nlf7nizutbmmzgblrnyo@boards.trello.com');
-//define('CONFIG_EMAIL_DESTINO_2', 'ti@pagmenossupermercado.com.br');
-//define('CONFIG_EMAIL_DESTINO_3', 'ti2@pagmenossupermercado.com.br');
-define('CONFIG_EMAIL_DESTINO_2', null);
+define('CONFIG_EMAIL_DESTINO_PRINCIPAL', 'ti@pagmenossupermercado.com.br');
+define('CONFIG_EMAIL_DESTINO_2', 'ti@pagmenossupermercado.com.br');
 define('CONFIG_EMAIL_DESTINO_3', null);
 
 define('MAIL', [
