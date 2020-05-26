@@ -59,6 +59,7 @@ if (filter_input(INPUT_POST, 'submit')) {
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <link rel="shortcut icon" href="imgs/favicon.png" />
+    <link rel="icon" href="imgs/favicon.png" />
     <title>PagMenos - Chamado</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -112,7 +113,7 @@ if (filter_input(INPUT_POST, 'submit')) {
                 <div class="form-group">
                     <label for="descricao"><b>DESCRIÇÃO DO PROBLEMA</b></label>
                     <textarea class="form-control" id="descricao" required name="descricao" rows="5"
-                              placeholder="EX.: Monitor do Caixa um não liga mais após queda de energia"></textarea>
+                              placeholder=""></textarea>
                 </div>
                 <div class="form-group">
                     <label for="descricao"><b>FOTO</b></label>
