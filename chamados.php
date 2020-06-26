@@ -137,6 +137,15 @@ if (filter_input(INPUT_POST, 'submit')) {
                         <b> ABRIR CHAMADO</b>
                     </button>
                 </div>
+                <div class="form-group">
+                    <hr>
+                    <button type="button"
+                            class="form-control btn btn-lg btn-warning"
+                            onclick="window.history.back()"
+                            value="Abertura de Chamado">
+                        <b> VOLTAR</b>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
