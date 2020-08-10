@@ -20,33 +20,27 @@
     <div class="card border-danger">
         <div style="text-align: center" class="card-header bg-danger text-white">
             <p><img src="imgs/logo.png" class="img-fluid" style="max-width: 300px"/></p>
-            <p><h5><b>Abertura de Chamados</b></h5></p>
+            <p><h5><b>MANUAIS</b></h5></p>
         </div>
         <div class="card-body">
-            <div class="form-group">
-                <br>
-                <form method="post" action="chamados.php">
+            <?php if ($handle = opendir('manuais')) {    while (false !== ($entry = readdir($handle))) {  if ($entry != "." && $entry != "..") { ?>
+                <div class="form-group">
                     <input type="hidden" value="TI" name="sector">
-                    <button type="submit" class="form-control btn btn-lg btn-outline-success">
-                        <b> ABRIR CHAMADO PARA TI</b>
-                    </button>
-
-                    <input type="hidden" value="TI" name="sector">
-                    <a href="manuais.php" class="form-control btn btn-outline-primary">
-                        <b> ACESSAR MANUAIS</b>
+                    <a href="<?php echo 'manuais/'.$entry ?>" class="form-control btn btn-lg btn-outline-primary">
+                        <b> <?php echo strtoupper($entry) ?></b>
                     </a>
-                </form>
-            </div>
+                </div>
+                <hr>
+            <?php } } } closedir($handle); ?>
+        </div>
+        <div class="form-group">
             <hr>
-            <div class="form-group">
-                <form method="post" action="chamados.php">
-                    <input type="hidden" value="Operações" name="sector">
-                    <button type="submit" class="form-control btn btn-lg btn-outline-info">
-                        <b> ABRIR CHAMADO PARA OPERAÇÕES</b>
-                    </button>
-                </form>
-            </div>
-            <br><br><br><br>
+            <button type="button"
+                    class="form-control btn btn-lg btn-warning"
+                    onclick="window.history.back()"
+                    value="Abertura de Chamado">
+                <b> VOLTAR</b>
+            </button>
         </div>
     </div>
 </div>
