@@ -46,6 +46,15 @@
                     </button>
                 </form>
             </div>
+            <hr>
+            <div class="form-group">
+                <form method="post" action="chamados.php">
+                    <input type="hidden" value="DP/RH" name="sector">
+                    <button type="submit" class="form-control btn btn-lg btn-outline-danger">
+                        <b> ABRIR CHAMADO DP/RH</b>
+                    </button>
+                </form>
+            </div>
             <br><br><br><br>
         </div>
     </div>

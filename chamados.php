@@ -16,28 +16,48 @@ if (filter_input(INPUT_POST, 'submit')) {
         $erroNoUpload = true;
     }
     $setor = filter_input(INPUT_POST, 'sector');
-    if ($setor && ($setor == 'TI' || $setor == 'Operações')) {
+
+    if ($setor && ($setor == 'TI' || $setor == 'Operações' || $setor == 'DP/RH')) {
     } else {
         echo 'Error: Setor destino desconhecido.';
         echo '<button onclick="window.history.back();">Voltar</button>';
         die();
     }
 
+
     $nome = strtoupper(filter_input(INPUT_POST, 'nome'));
     $loja = strtoupper(filter_input(INPUT_POST, 'loja'));
     $equipamento = strtoupper(filter_input(INPUT_POST, 'equipamento'));
     $descricao = filter_input(INPUT_POST, 'descricao');
+    $whatsapp = filter_input(INPUT_POST, 'whatsapp');
+
     if (is_null(CONFIG_EMAIL_TI_1) || empty(CONFIG_EMAIL_TI_1)) {
         $mensagemDeErro = 'Verifique as configurações.';
     } else {
         $email = new \Mail\Email();
-        $assunto = '[' . str_replace(' ', '', $loja) . '] ' . $equipamento;
+        $assunto = '[' . $loja . '][' . ($codigoChamado = date('Hismyd')) . '] ' . $equipamento;
         $corpo = '## Chamado aberto por: ' . $nome
-            . PHP_EOL . '### Descrição: ' . PHP_EOL . $descricao;
+            . PHP_EOL . '### Descrição: '
+            . PHP_EOL . $descricao
+            . PHP_EOL . '------------------------'
+            . PHP_EOL . PHP_EOL . 'Link para WhatsApp: https://wa.me/55' . $whatsapp . '?text=' . urlencode('Retorno ao Chamado: ' . $assunto . '. Aberto em: ' . date('d/m/Y H:i:s'));
+        $emailDestino = CONFIG_EMAIL_TI_1;
+        switch ($setor) {
+            case 'DP/RH':
+                $emailDestino = CONFIG_EMAIL_DP_RH_1;
+                break;
+            case 'Operações':
+                $emailDestino = CONFIG_EMAIL_OPERACOES_1;
+                break;
+            case 'TI':
+            default:
+                $emailDestino = CONFIG_EMAIL_TI_1;
+                break;
+        }
         $email->add($assunto,
             $corpo,
             $setor,
-            $setor == 'TI' ? CONFIG_EMAIL_TI_1 : CONFIG_EMAIL_OPERACOES_1);
+            $emailDestino);
         if (!$erroNoUpload) {
             $email->attach($target_file, 'Foto');
         }
@@ -46,7 +66,7 @@ if (filter_input(INPUT_POST, 'submit')) {
             unlink($target_file);
         }
         if (!$error = $email->error()) {
-            $mensagemSucesso = 'Abertura de chamado enviado.';
+            $mensagemSucesso = 'Abertura de chamado enviado.<br><br><h1 class="">Código do chamado: <strong>' . $codigoChamado . '</strong></h1><br>';
         } else {
             //error
             $mensagemDeErro = $error->getMessage();
@@ -84,7 +104,8 @@ if (filter_input(INPUT_POST, 'submit')) {
                 <h5 style="text-align: center"><b><?= $mensagemDeErro ?></b></h5>
             </div>
         <?php } ?>
-        <div style="text-align: center" class="card-header bg-<?= filter_input(INPUT_POST, 'sector')=='TI'?'danger':'info' ?> text-white">
+        <div style="text-align: center"
+             class="card-header bg-<?= filter_input(INPUT_POST, 'sector') == 'TI' ? 'danger' : 'info' ?> text-white">
             <p><img src="imgs/logo.png" class="img-fluid" style="max-width: 300px"/></p>
             <p><h5><b>PagMenos - <?= filter_input(INPUT_POST, 'sector') ?> | Abertura de Chamados</b></h5></p>
         </div>
@@ -97,8 +118,15 @@ if (filter_input(INPUT_POST, 'submit')) {
                            placeholder="EX.: FULANO DA SILVA">
                 </div>
                 <div class="form-group">
+                    <label for="nome"><b>WhatsApp para Retorno</label>
+                    <input type="text" required class="form-control" id="whatsapp" name="whatsapp"
+                           onblur="if(document.getElementById('whatsapp').value.length < 11){alert('WhatsApp inválido Coloque o DDD e o Telefone. Ex.: 81982010200!');}"
+                           placeholder="Telefone com DDD. EX.: 81982010200">
+                </div>
+                <div class="form-group">
                     <label for="loja"><b>LOJA</b></label></label>
                     <select required class="form-control" id="loja" name="loja">
+                        <!--                        temos lojas 1, 2, 4, 5, 6, 8, 9, 10, 11, 12, Empório e Panini-->
                         <option disabled selected>SELECIONE</option>
                         <option>LOJA 01</option>
                         <option>LOJA 02</option>
@@ -109,6 +137,9 @@ if (filter_input(INPUT_POST, 'submit')) {
                         <option>LOJA 09</option>
                         <option>LOJA 10</option>
                         <option>LOJA 11</option>
+                        <option>LOJA 12</option>
+                        <option>EMPÓRIO PRIME</option>
+                        <option>PANINI</option>
                         <option>ESCRITÓRIO</option>
                     </select>
                 </div>
