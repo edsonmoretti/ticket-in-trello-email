@@ -53,6 +53,7 @@ if (filter_input(INPUT_POST, 'submit')) {
             default:
                 $emailDestino = CONFIG_EMAIL_TI_1;
                 break;
+
         }
         $email->add($assunto,
             $corpo,
