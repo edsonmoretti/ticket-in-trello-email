@@ -30,6 +30,7 @@ if (filter_input(INPUT_POST, 'submit')) {
     $equipamento = strtoupper(filter_input(INPUT_POST, 'equipamento'));
     $descricao = filter_input(INPUT_POST, 'descricao');
     $whatsapp = filter_input(INPUT_POST, 'whatsapp');
+    $whatsapp = str_replace(' ', '', trim($whatsapp)) ;
 
     if (is_null(CONFIG_EMAIL_TI_1) || empty(CONFIG_EMAIL_TI_1)) {
         $mensagemDeErro = 'Verifique as configurações.';
