@@ -157,7 +157,7 @@ if (filter_input(INPUT_POST, 'submit')) {
                 </div>
                 <div class="form-group">
                     <label for="descricao"><b>FOTO</b></label>
-                    <input id="foto" name="foto" type="file" accept="image/*;capture=camera" class="form-control"/>
+                    <input id="foto" name="foto" type="file" accept="application/pdf,image/*;capture=camera" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <hr>
