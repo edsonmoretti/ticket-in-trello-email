@@ -114,13 +114,13 @@ if (filter_input(INPUT_POST, 'submit')) {
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="nome"><b>NOME E SOBRENOME</label>
+                    <label for="nome"><b>SEU NOME COMPLETO</label>
                     <input type="text" required class="form-control" id="nome" name="nome"
                            onblur="if(!document.getElementById('nome').value.trim().includes(' ')){alert('Nome inválido!');}"
                            placeholder="EX.: FULANO DA SILVA">
                 </div>
                 <div class="form-group">
-                    <label for="nome"><b>WhatsApp para Retorno</label>
+                    <label for="nome"><b>WHATSAPP PARA RETORNO</label>
                     <input type="text" required class="form-control" id="whatsapp" name="whatsapp"
                            onblur="if(document.getElementById('whatsapp').value.length < 11){alert('WhatsApp inválido Coloque o DDD e o Telefone. Ex.: 81982010200!');}"
                            placeholder="Telefone com DDD. EX.: 81982010200">
@@ -151,9 +151,16 @@ if (filter_input(INPUT_POST, 'submit')) {
                            placeholder="EX.: MONITOR DO CAIXA 01, IMPRESSORA DO ESCRITÓRIO, ETC...">
                 </div>
                 <div class="form-group">
-                    <label for="descricao"><b>DESCRIÇÃO DO PROBLEMA</b></label>
-                    <textarea class="form-control" id="descricao" required name="descricao" rows="5"
-                              placeholder=""></textarea>
+                    <label for="descricao"><b>DESCRIÇÃO</b></label>
+                    <textarea class="form-control" id="descricao" required name="descricao" rows="7"
+                              placeholder="EX.:
+ATESTADO DE DANIEL ALVES (OP. DE CAIXA)
+CONTRACHEQUE DE EDSON MORETTI DO NASCIMENTO
+COMPUTADOR NÃO LIGA
+TELA DO CAIXA ESTÁ PISCANDO
+GELADEIRA QUEIMOU
+LAMPADAS DO CORREDOR ESTÃO PISCANDO
+"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="descricao"><b>FOTO</b></label>
