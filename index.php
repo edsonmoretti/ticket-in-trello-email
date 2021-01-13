@@ -27,6 +27,7 @@
                 <br>
                 <form method="post" action="chamados.php">
                     <input type="hidden" value="TI" name="sector">
+                    <input type="hidden" value="success" name="classe">
                     <button type="submit" class="form-control btn btn-lg btn-outline-success">
                         <b> ABRIR CHAMADO PARA TI</b>
                     </button>
@@ -41,8 +42,9 @@
             <div class="form-group">
                 <form method="post" action="chamados.php">
                     <input type="hidden" value="Operações" name="sector">
+                    <input type="hidden" value="info" name="classe">
                     <button type="submit" class="form-control btn btn-lg btn-outline-info">
-                        <b> ABRIR CHAMADO PARA OPERAÇÕES</b>
+                        <b> ABRIR CHAMADO P/ OPERAÇÕES</b>
                     </button>
                 </form>
             </div>
@@ -50,8 +52,19 @@
             <div class="form-group">
                 <form method="post" action="chamados.php">
                     <input type="hidden" value="DP/RH" name="sector">
+                    <input type="hidden" value="danger" name="classe">
                     <button type="submit" class="form-control btn btn-lg btn-outline-danger">
                         <b> ABRIR CHAMADO DP/RH</b>
+                    </button>
+                </form>
+            </div>
+            <hr>
+            <div class="form-group">
+                <form method="post" action="chamados.php">
+                    <input type="hidden" value="Prevenção" name="sector">
+                    <input type="hidden" value="dark" name="classe">
+                    <button type="submit" class="form-control btn btn-lg btn-outline-dark">
+                        <b> ABRIR CHAMADO P/ PREVENÇÃO</b>
                     </button>
                 </form>
             </div>

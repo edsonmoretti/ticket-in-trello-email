@@ -17,7 +17,7 @@ if (filter_input(INPUT_POST, 'submit')) {
     }
     $setor = filter_input(INPUT_POST, 'sector');
 
-    if ($setor && ($setor == 'TI' || $setor == 'Operações' || $setor == 'DP/RH')) {
+    if ($setor && ($setor == 'TI' || $setor == 'Operações' || $setor == 'DP/RH' || $setor == 'Prevenção')) {
     } else {
         echo 'Error: Setor destino desconhecido.';
         echo '<button onclick="window.history.back();">Voltar</button>';
@@ -30,7 +30,7 @@ if (filter_input(INPUT_POST, 'submit')) {
     $equipamento = strtoupper(filter_input(INPUT_POST, 'equipamento'));
     $descricao = filter_input(INPUT_POST, 'descricao');
     $whatsapp = filter_input(INPUT_POST, 'whatsapp');
-    $whatsapp = str_replace(' ', '', trim($whatsapp)) ;
+    $whatsapp = str_replace(' ', '', trim($whatsapp));
 
     if (is_null(CONFIG_EMAIL_TI_1) || empty(CONFIG_EMAIL_TI_1)) {
         $mensagemDeErro = 'Verifique as configurações.';
@@ -49,6 +49,9 @@ if (filter_input(INPUT_POST, 'submit')) {
                 break;
             case 'Operações':
                 $emailDestino = CONFIG_EMAIL_OPERACOES_1;
+                break;
+            case 'Prevenção':
+                $emailDestino = CONFIG_EMAIL_PREVENCAO_1;
                 break;
             case 'TI':
             default:
@@ -95,7 +98,7 @@ if (filter_input(INPUT_POST, 'submit')) {
 </head>
 <body>
 <div class="container fluid">
-    <div class="card border-danger">
+    <div class="card border-<?= filter_input(INPUT_POST, 'classe') ?>">
         <?php if (!empty($mensagemSucesso)) { ?>
             <div class="card-header alert bg-success text-white">
                 <h5 style="text-align: center"><b><?= $mensagemSucesso ?></b></h5>
@@ -107,7 +110,7 @@ if (filter_input(INPUT_POST, 'submit')) {
             </div>
         <?php } ?>
         <div style="text-align: center"
-             class="card-header bg-<?= filter_input(INPUT_POST, 'sector') == 'TI' ? 'danger' : 'info' ?> text-white">
+             class="card-header bg-<?= filter_input(INPUT_POST, 'classe') ?> text-white">
             <p><img src="imgs/logo.png" class="img-fluid" style="max-width: 300px"/></p>
             <p><h5><b>PagMenos - <?= filter_input(INPUT_POST, 'sector') ?> | Abertura de Chamados</b></h5></p>
         </div>
@@ -164,14 +167,15 @@ LAMPADAS DO CORREDOR ESTÃO PISCANDO
                 </div>
                 <div class="form-group">
                     <label for="descricao"><b>FOTO</b></label>
-                    <input id="foto" name="foto" type="file" accept="application/pdf,image/*;capture=camera" class="form-control"/>
+                    <input id="foto" name="foto" type="file" accept="application/pdf,image/*;capture=camera"
+                           class="form-control"/>
                 </div>
                 <div class="form-group">
                     <hr>
                     <br>
                     <input type="hidden" value="<?= filter_input(INPUT_POST, 'sector') ?>" name="sector">
                     <button type="submit"
-                            class="form-control btn btn-lg btn-outline-<?= filter_input(INPUT_POST, 'sector') == 'TI' ? 'danger' : 'info' ?>"
+                            class="form-control btn btn-lg btn-outline-<?= filter_input(INPUT_POST, 'classe') ?>"
                             name="submit"
                             value="Abertura de Chamado">
                         <b> ABRIR CHAMADO</b>
