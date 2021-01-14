@@ -68,6 +68,16 @@
                     </button>
                 </form>
             </div>
+            <hr>
+            <div class="form-group">
+                <form method="post" action="chamados.php">
+                    <input type="hidden" value="Jurídico" name="sector">
+                    <input type="hidden" value="secondary" name="classe">
+                    <button type="submit" class="form-control btn btn-lg btn-outline-secondary">
+                        <b> ABRIR CHAMADO P/ JURÍDICO</b>
+                    </button>
+                </form>
+            </div>
             <br><br><br><br>
         </div>
     </div>

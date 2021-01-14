@@ -17,7 +17,7 @@ if (filter_input(INPUT_POST, 'submit')) {
     }
     $setor = filter_input(INPUT_POST, 'sector');
 
-    if ($setor && ($setor == 'TI' || $setor == 'Operações' || $setor == 'DP/RH' || $setor == 'Prevenção')) {
+    if ($setor && ($setor == 'TI' || $setor == 'Operações' || $setor == 'DP/RH' || $setor == 'Prevenção' || $setor == 'Jurídico')) {
     } else {
         echo 'Error: Setor destino desconhecido.';
         echo '<button onclick="window.history.back();">Voltar</button>';
@@ -52,6 +52,9 @@ if (filter_input(INPUT_POST, 'submit')) {
                 break;
             case 'Prevenção':
                 $emailDestino = CONFIG_EMAIL_PREVENCAO_1;
+                break;
+            case 'Jurídico':
+                $emailDestino = CONFIG_EMAIL_JURIDICO_1;
                 break;
             case 'TI':
             default:
@@ -174,6 +177,7 @@ LAMPADAS DO CORREDOR ESTÃO PISCANDO
                     <hr>
                     <br>
                     <input type="hidden" value="<?= filter_input(INPUT_POST, 'sector') ?>" name="sector">
+                    <input type="hidden" value="<?= filter_input(INPUT_POST, 'classe') ?>" name="classe">
                     <button type="submit"
                             class="form-control btn btn-lg btn-outline-<?= filter_input(INPUT_POST, 'classe') ?>"
                             name="submit"
