@@ -1,16 +1,16 @@
 <?php
 
-define('CONFIG_EMAIL_TI_1', 'tipagmenossupermercados+aqzdr8ybcadyh7zey7zx@boards.trello.com');
-define('CONFIG_EMAIL_OPERACOES_1', 'edwedjadelimasilva+qliuidiphvdumgc3wsq3@boards.trello.com');
-define('CONFIG_EMAIL_DP_RH_1', 'edwedjadelimasilva+uj7rba8s0nny1hs1qx97@boards.trello.com');
-define('CONFIG_EMAIL_PREVENCAO_1', 'edwedjadelimasilva+wl5zo8caurvt3vamvri9@boards.trello.com');
-define('CONFIG_EMAIL_JURIDICO_1', 'tamirysbarbosabrasileiro+bjvxcc0totqqhkbso0vs@boards.trello.com');
+define('CONFIG_EMAIL_TI_1', 'teste@teste.com');
+define('CONFIG_EMAIL_OPERACOES_1', 'teste@teste.com');
+define('CONFIG_EMAIL_DP_RH_1', 'teste@teste.com');
+define('CONFIG_EMAIL_PREVENCAO_1', 'teste@teste.com');
+define('CONFIG_EMAIL_JURIDICO_1', 'teste@teste.com');
 
 define('MAIL', [
-    'host' => 'mail84.redehost.com.br',
+    'host' => 'host',
     'port' => '587',
-    'user' => 'ti2@pagmenossupermercado.com.br',
-    'password' => '#Pag2020',
-    'from_name' => 'TI2 - Chamado',
-    'from_email' => 'ti2@pagmenossupermercado.com.br',
+    'user' => 'ti2@dominio.com.br',
+    'password' => '#pw',
+    'from_name' => 'TI - Chamado',
+    'from_email' => 'ti2@dominio.com.br',
 ]);
